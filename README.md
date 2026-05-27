@@ -35,7 +35,7 @@ Most planners force you to choose: the focus of pen and paper, or the power of d
 
 ```
 ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│  Print      │ → │  Scan       │ → │  Data       │ → │  Analytics  │
+│  Print      │ -→ │  Scan       │ -→ │  Data       │ -→ │  Analytics  │
 │  Layer      │    │  Layer      │    │  Layer      │    │  Layer      │
 │  (PDF)      │    │  (OCR/ML)   │    │  (Storage)  │    │  (Dashboard)│
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
