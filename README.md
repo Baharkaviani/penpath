@@ -102,6 +102,51 @@ Free-form lines to write what happened, what to carry forward, and what to chang
 
 ---
 
+## Badge System
+
+Penpath includes a gamified progression system built on three dimensions: **Momentum** (weekly streak), **Mastery** (monthly cycles), and **Resilience** (recovery after failure).
+
+A week is a **win** when the Weekly Score ≥ 80%. Only winning weeks advance the streak.
+
+### Weekly Progression
+
+Four consecutive wins unlock four crystal badges in order:
+
+| Badge | Name | Color | Symbolism |
+|:---:|---|---|---|
+| <img src="design/badges/week1.webp" width="52"> | **The Seed of Beginning** | Turquoise-blue | New beginnings, initiation of discipline |
+| <img src="design/badges/week2.webp" width="52"> | **The Flame of Focus** | Golden-orange | Growing intensity and momentum |
+| <img src="design/badges/week3.webp" width="52"> | **The Garden of Growth** | Emerald-green | Structured development, flourishing habits |
+| <img src="design/badges/week4.webp" width="52"> | **The Gem of Balance** | Lavender-purple | Harmony and sustainable discipline |
+
+### Monthly Milestone
+
+| Badge | Name | Awarded when |
+|:---:|---|---|
+| <img src="design/badges/crown.webp" width="52"> | **The Crown of Consistency** | 4 consecutive winning weeks completed |
+
+After earning the Crown, the cycle restarts at a higher tier (Seed I → Crown I, then Seed II → Crown II, …), enabling infinite long-term progression.
+
+### Recovery Badge
+
+| Badge | Name | Awarded when |
+|:---:|---|---|
+| <img src="design/badges/phoenix.png" width="52"> | **The Phoenix of Return** | A failed week is immediately followed by a winning week |
+
+The Phoenix is recorded permanently but does not restore the broken streak or count toward progression.
+
+### Rules at a Glance
+
+| Event | Effect |
+|---|---|
+| Weekly Score ≥ 80% | Win — advances streak (Week 1 → 2 → 3 → 4) |
+| 4 consecutive wins | Crown of Consistency awarded; cycle restarts at next tier |
+| Weekly Score < 80% | Streak resets to zero; cycle restarts from Week 1 |
+| Failure → Win | Phoenix of Return awarded; streak begins fresh from Week 1 |
+| Any earned badge | Permanently unlocked — failures never remove past badges |
+
+---
+
 ## Getting Started
 
 ```bash
@@ -120,6 +165,7 @@ To generate the flowboard PDF, open `design/flowboard.tex` in [Overleaf](https:/
 
 - [x] Project structure & Docker setup
 - [x] Printable weekly flowboard (LaTeX)
+- [x] Badge system design (Momentum · Mastery · Resilience)
 
 ---
 
