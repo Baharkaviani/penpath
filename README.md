@@ -83,28 +83,11 @@ Free-form lines to write what happened, what to carry forward, and what to chang
 ## Architecture
 
 ```
-┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Print       │     │  Scan        │     │  Data        │     │  Analytics   │
-│  Layer       │────▶│  Layer       │────▶│  Layer       │────▶│  Layer       │
-│  (PDF/LaTeX) │     │  (OCR/ML)    │     │  (Storage)   │     │  (Dashboard) │
-└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
-```
-
----
-
-## Project Structure
-
-```
-penpath/
-├── backend/          # Django + DRF API
-│   ├── config/       # Settings, URLs, Celery
-│   └── requirements.txt
-├── frontend/         # Vue.js app
-│   └── src/
-├── design/           # Printable flowboard
-│   └── flowboard.tex # LaTeX source → compile to PDF
-├── docker-compose.yml
-└── .env.example
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Print      │ -→ │  Scan       │ -→ │  Data       │ -→ │  Analytics  │
+│  Layer      │    │  Layer      │    │  Layer      │    │  Layer      │
+│  (PDF)      │    │  (OCR/ML)   │    │  (Storage)  │    │  (Dashboard)│
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
 ```
 
 ---
@@ -113,7 +96,7 @@ penpath/
 
 ```bash
 cp .env.example .env
-docker compose up --build
+docker compose up -d
 ```
 
 - Backend API: http://localhost:8000
@@ -127,9 +110,6 @@ To generate the flowboard PDF, open `design/flowboard.tex` in [Overleaf](https:/
 
 - [x] Project structure & Docker setup
 - [x] Printable weekly flowboard (LaTeX)
-- [ ] Scan & OCR pipeline
-- [ ] Digital planner sync
-- [ ] Analytics dashboard
 
 ---
 
