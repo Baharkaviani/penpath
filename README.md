@@ -41,25 +41,33 @@ The main table for your most important work that week. Each row is one goal with
 | Main Goal | The task or goal for the week |
 | Why? | Your reason — keeps motivation visible |
 | Est. Time | How long you expect it to take |
-| Tracker [Free Yourself] | 7 circles to fill in as you make progress |
+| Tracker [Free Yourself] | A row of circles to fill in as you make progress |
 | Notes | Observations, blockers, or context |
 
-**Plus Tasks table**
+**Side Quests table**
 
 Same structure as Core Tasks, but for side activities and lower-priority work. The first column is labelled *Side Activity* instead of *Main Goal*.
 
-**Ratios**
+**Rates**
 
 At the bottom of the tables, three metrics are calculated by hand after the week:
 
-- **Core Ratio** — completed core circles / total core circles × 100
-- **Plus Rate** — completed plus circles / total plus circles × 100
-- **Weekly Score** — `0.7 × Core + 0.3 × Plus`
+- **Core Rate** — completed core circles / total core circles × 100
+- **Side Rate** — completed side circles / total side circles × 100
+- **Weekly Score** — `0.7 × Core + 0.3 × Side`
 
-**Evaluation**
+**FLAME + Fulfillment Review**
 
-- *What if I don't do it?* — written before the week starts as a motivational anchor
-- *What if I become successful?* — positive visualisation of the outcome
+A 6-question self-rating section scored 1–5, completed at the end of the week:
+
+| # | Dimension | Question |
+|---|---|---|
+| F | Focus | How present and focused were you while working? |
+| L | Leverage | Did you spend time on the highest-impact things? |
+| A | Alignment | Did your actions align with who you want to become? |
+| M | Momentum | How much did you stay ahead and keep moving forward? |
+| E | Energy | How energized and physically sustainable did you feel? |
+| + | Fulfillment | How fulfilled and satisfied did you feel about yourself? |
 
 **Reflection**
 

@@ -30,11 +30,11 @@
 %─── Macros ────────────────────────────────────────────────────────────────────
 % Single tracking circle
 \newcommand{\tc}{%
-  \tikz[baseline=-0.6ex]{\draw[ring, line width=0.45pt](0,0)circle(3pt);}%
+  \tikz[baseline=-0.6ex]{\draw[ring, line width=0.45pt](0,0)circle(4pt);}%
   \hspace{2.5pt}%
 }
 % Seven circles (one per day)
-\newcommand{\tracker}{\tc\tc\tc\tc\tc\tc\tc}
+\newcommand{\tracker}{\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc}
 
 % Write line — safe inside p-columns
 \newcommand{\wl}{%
@@ -59,18 +59,63 @@
 % Data row strut — symmetric so m{} centers it correctly
 \newcommand{\dstrut}{\rule[-4.5mm]{0pt}{9mm}}
 
-% Task table — shared structure, #1 = first column header
+% Numbered rating circle (1–5 scale)
+\newcommand{\rcircle}[1]{%
+  \tikz[baseline=-0.55ex]{%
+    \draw[ring, line width=0.4pt](0,0)circle(4pt);%
+    \node[font=\tiny, text=ring] at (0,0) {#1};%
+  }\hspace{1.5pt}%
+}
+\newcommand{\ratescale}{\rcircle{1}\rcircle{2}\rcircle{3}\rcircle{4}\rcircle{5}}
+
+% Rating question: #1 = bold title, #2 = description
+\newcommand{\rqb}[2]{%
+  \noindent%
+  \footnotesize\textbf{\textcolor{ink}{#1}: }%
+  {\tiny\textcolor{ink!75}{#2}}\hfill\ratescale%
+  \par\vspace{2pt}%
+}
+
+% Task table header — shared columns spec
+\newcommand{\tableheader}[1]{%
+  \hline
+  \rule[-4pt]{0pt}{14pt}\sh{#1} &
+  \rule[-4pt]{0pt}{14pt}\sh{Why?} &
+  \rule[-4pt]{0pt}{14pt}\sh{Est.\ Time} &
+  \rule[-4pt]{0pt}{14pt}\sh{Tracker\enspace{[Free Yourself]}} &
+  \rule[-4pt]{0pt}{14pt}\sh{Notes} \\%
+}
+
+% Core task table — 7 rows
+\newcommand{\coretable}[1]{%
+  \renewcommand{\arraystretch}{1.0}%
+  \noindent%
+  \begin{tabularx}{\textwidth}{m{8cm}m{4cm}m{1.8cm}m{6.1cm}X}
+    \tableheader{#1}
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+  \end{tabularx}%
+}
+
+% Plus task table — 5 rows
 \newcommand{\tasktable}[1]{%
   \renewcommand{\arraystretch}{1.0}%
   \noindent%
-  \begin{tabularx}{\textwidth}{|m{8cm}|m{4cm}|m{2cm}|m{6cm}|X|}
-    \hline
-    \rowcolor{headbg}
-    \rule[-4pt]{0pt}{14pt}\sh{#1} &
-    \rule[-4pt]{0pt}{14pt}\sh{Why?} &
-    \rule[-4pt]{0pt}{14pt}\sh{Est.\ Time} &
-    \rule[-4pt]{0pt}{14pt}\sh{Tracker\enspace{[Free Yourself]}} &
-    \rule[-4pt]{0pt}{14pt}\sh{Notes} \\
+  \begin{tabularx}{\textwidth}{m{8cm}m{4cm}m{1.8cm}m{6.1cm}X}
+    \tableheader{#1}
     \hline
     \dstrut & & & \tracker & \\
     \hline
@@ -92,7 +137,7 @@
 %═══════════════════════════════════════════════════════════════════════════════
 \noindent
 \begin{minipage}[c]{0.36\textwidth}
-  \sh{Focus of the Week:}\\[4pt]
+  \sh{Focus of the Week}\\[4pt]
   {\color{rl}\rule{\linewidth}{0.32pt}}
 \end{minipage}%
 \hfill
@@ -104,7 +149,7 @@
 \hfill
 \begin{minipage}[c]{0.34\textwidth}
   \raggedleft
-  \sh{Prize of the Week:}\\[4pt]
+  \sh{Prize of the Week}\\[4pt]
   {\color{rl}\rule{\linewidth}{0.32pt}}
 \end{minipage}
 
@@ -114,14 +159,14 @@
 %  CORE TASKS
 %═══════════════════════════════════════════════════════════════════════════════
 \tablabel{CORE TASKS}
-\tasktable{Main Goal}
+\coretable{Main Goal}
 
 \vspace{3mm}
 
 %═══════════════════════════════════════════════════════════════════════════════
 %  PLUS TASKS
 %═══════════════════════════════════════════════════════════════════════════════
-\tablabel{PLUS TASKS}
+\tablabel{SIDE QUESTS}
 \tasktable{Side Activity}
 
 \vspace{4mm}
@@ -132,7 +177,7 @@
 \noindent
 \begin{minipage}[c]{0.28\textwidth}
   {\footnotesize
-    \sh{Core Ratio:}\enspace
+    \sh{Core Rate:}\enspace
     {\color{rl}\rule{1.0cm}{0.3pt}}\;/\;{\color{rl}\rule{1.0cm}{0.3pt}}
     \;=\;{\color{rl}\rule{0.9cm}{0.3pt}}\;\%
   }
@@ -141,7 +186,7 @@
 \begin{minipage}[c]{0.28\textwidth}
   \centering
   {\footnotesize
-    \sh{Plus Rate:}\enspace
+    \sh{Side Rate:}\enspace
     {\color{rl}\rule{1.0cm}{0.3pt}}\;/\;{\color{rl}\rule{1.0cm}{0.3pt}}
     \;=\;{\color{rl}\rule{0.9cm}{0.3pt}}\;\%
   }
@@ -151,7 +196,7 @@
   \raggedleft
   {\footnotesize
     \sh{Weekly Score:}\enspace
-    $0.7 \times \text{Core} + 0.3 \times \text{Plus}$
+    $0.7 \times \text{Core} + 0.3 \times \text{Side}$
     \;=\;{\color{rl}\rule{1.0cm}{0.3pt}}
   }
 \end{minipage}
@@ -162,19 +207,14 @@
 %  EVALUATION + REFLECTION
 %═══════════════════════════════════════════════════════════════════════════════
 \noindent
-\begin{minipage}[t]{0.34\textwidth}
-  \sh{Evaluation}\vspace{2mm}\\
-  {\footnotesize
-    $\bullet$\enspace
-      \sh{What if I don't do it?}\enspace
-      {\color{rl}\rule{4.8cm}{0.3pt}}\\[6pt]
-    $\bullet$\enspace
-      \sh{What if I become successful?}\enspace
-      {\color{rl}\rule{3.5cm}{0.3pt}}\\[6pt]
-    $\bullet$\enspace
-      \sh{Core Ratio:}\enspace{\color{rl}\rule{1cm}{0.3pt}}\quad
-      \sh{Plus Rate:}\enspace{\color{rl}\rule{1cm}{0.3pt}}
-  }
+\begin{minipage}[t]{0.35\textwidth}
+  \sh{FLAME + Fulfillment Review}\vspace{2mm}\\
+  \rqb{Focus}{How present and focused were you while working?}
+  \rqb{Leverage}{Did you spend time on the highest-impact things?}
+  \rqb{Alignment}{Did your actions align with who you want to become?}
+  \rqb{Momentum}{How much did you stay ahead of the tasks?}
+  \rqb{Energy}{How energized and physically sustainable did you feel?}
+  \rqb{Fulfillment}{How fulfilled and satisfied did you feel about yourself?}
 \end{minipage}%
 \hspace{4mm}
 {\color{rl}\vrule width 0.4pt}
