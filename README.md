@@ -25,6 +25,8 @@ Most planners force you to choose: the focus of pen and paper, or the power of d
 
 The flowboard is a single A4 landscape page generated from a LaTeX template (`design/flowboard.tex`). It is designed to be printed, filled in by hand each week, and then scanned.
 
+![Weekly Flowboard Preview](design/flowboard-preview.png)
+
 ### Layout
 
 **Header**
