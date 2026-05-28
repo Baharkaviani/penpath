@@ -1,0 +1,187 @@
+\documentclass[a4paper, landscape]{article}
+\usepackage[a4paper, landscape, top=0.85cm, bottom=0.85cm, left=1.0cm, right=1.0cm]{geometry}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{5pt}
+\setlength{\extrarowheight}{0pt}
+
+%─── Colors ────────────────────────────────────────────────────────────────────
+\definecolor{ink}{RGB}{20, 42, 105}
+\definecolor{ring}{RGB}{135, 135, 135}
+\definecolor{rl}{RGB}{175, 175, 175}
+\definecolor{headbg}{RGB}{232, 237, 252}
+\definecolor{tabline}{RGB}{190, 190, 190}
+
+\arrayrulecolor{tabline}
+% Make tabularx X column behave like m{} (vertically centered)
+\renewcommand\tabularxcolumn[1]{m{#1}}
+
+%─── Macros ────────────────────────────────────────────────────────────────────
+% Single tracking circle
+\newcommand{\tc}{%
+  \tikz[baseline=-0.6ex]{\draw[ring, line width=0.45pt](0,0)circle(3pt);}%
+  \hspace{2.5pt}%
+}
+% Seven circles (one per day)
+\newcommand{\tracker}{\tc\tc\tc\tc\tc\tc\tc}
+
+% Write line — safe inside p-columns
+\newcommand{\wl}{%
+  \par\vspace{1.5mm}%
+  {\color{rl}\rule{\linewidth}{0.28pt}}%
+  \vspace{1.5mm}%
+}
+
+% Section heading
+\newcommand{\sh}[1]{{\footnotesize\bfseries\color{ink}#1}}
+
+% Table label above a table
+\newcommand{\tablabel}[1]{%
+  \noindent{\small\bfseries\color{ink}#1}\vspace{1.5mm}\\%
+}
+
+% Full-width rule
+\newcommand{\seprule}{%
+  \vspace{2mm}\noindent{\color{rl}\rule{\linewidth}{0.5pt}}\vspace{2mm}%
+}
+
+% Data row strut — symmetric so m{} centers it correctly
+\newcommand{\dstrut}{\rule[-4.5mm]{0pt}{9mm}}
+
+% Task table — shared structure, #1 = first column header
+\newcommand{\tasktable}[1]{%
+  \renewcommand{\arraystretch}{1.0}%
+  \noindent%
+  \begin{tabularx}{\textwidth}{|m{8cm}|m{4cm}|m{2cm}|m{6cm}|X|}
+    \hline
+    \rowcolor{headbg}
+    \rule[-4pt]{0pt}{14pt}\sh{#1} &
+    \rule[-4pt]{0pt}{14pt}\sh{Why?} &
+    \rule[-4pt]{0pt}{14pt}\sh{Est.\ Time} &
+    \rule[-4pt]{0pt}{14pt}\sh{Tracker\enspace{[Free Yourself]}} &
+    \rule[-4pt]{0pt}{14pt}\sh{Notes} \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+    \dstrut & & & \tracker & \\
+    \hline
+  \end{tabularx}%
+}
+
+\begin{document}
+
+%═══════════════════════════════════════════════════════════════════════════════
+%  HEADER
+%═══════════════════════════════════════════════════════════════════════════════
+\noindent
+\begin{minipage}[c]{0.36\textwidth}
+  \sh{Focus of the Week:}\\[4pt]
+  {\color{rl}\rule{\linewidth}{0.32pt}}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.24\textwidth}
+  \centering
+  {\large\bfseries\color{ink}Weekly Flowboard}\\[4pt]
+  {\small\color{ink!60}{\color{rl}\rule{4.5cm}{0.32pt}}}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.34\textwidth}
+  \raggedleft
+  \sh{Prize of the Week:}\\[4pt]
+  {\color{rl}\rule{\linewidth}{0.32pt}}
+\end{minipage}
+
+\vspace{3mm}
+
+%═══════════════════════════════════════════════════════════════════════════════
+%  CORE TASKS
+%═══════════════════════════════════════════════════════════════════════════════
+\tablabel{CORE TASKS}
+\tasktable{Main Goal}
+
+\vspace{3mm}
+
+%═══════════════════════════════════════════════════════════════════════════════
+%  PLUS TASKS
+%═══════════════════════════════════════════════════════════════════════════════
+\tablabel{PLUS TASKS}
+\tasktable{Side Activity}
+
+\vspace{4mm}
+
+%═══════════════════════════════════════════════════════════════════════════════
+%  RATIOS
+%═══════════════════════════════════════════════════════════════════════════════
+\noindent
+\begin{minipage}[c]{0.28\textwidth}
+  {\footnotesize
+    \sh{Core Ratio:}\enspace
+    {\color{rl}\rule{1.0cm}{0.3pt}}\;/\;{\color{rl}\rule{1.0cm}{0.3pt}}
+    \;=\;{\color{rl}\rule{0.9cm}{0.3pt}}\;\%
+  }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.28\textwidth}
+  \centering
+  {\footnotesize
+    \sh{Plus Rate:}\enspace
+    {\color{rl}\rule{1.0cm}{0.3pt}}\;/\;{\color{rl}\rule{1.0cm}{0.3pt}}
+    \;=\;{\color{rl}\rule{0.9cm}{0.3pt}}\;\%
+  }
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.38\textwidth}
+  \raggedleft
+  {\footnotesize
+    \sh{Weekly Score:}\enspace
+    $0.7 \times \text{Core} + 0.3 \times \text{Plus}$
+    \;=\;{\color{rl}\rule{1.0cm}{0.3pt}}
+  }
+\end{minipage}
+
+\vspace{3mm}
+
+%═══════════════════════════════════════════════════════════════════════════════
+%  EVALUATION + REFLECTION
+%═══════════════════════════════════════════════════════════════════════════════
+\noindent
+\begin{minipage}[t]{0.34\textwidth}
+  \sh{Evaluation}\vspace{2mm}\\
+  {\footnotesize
+    $\bullet$\enspace
+      \sh{What if I don't do it?}\enspace
+      {\color{rl}\rule{4.8cm}{0.3pt}}\\[6pt]
+    $\bullet$\enspace
+      \sh{What if I become successful?}\enspace
+      {\color{rl}\rule{3.5cm}{0.3pt}}\\[6pt]
+    $\bullet$\enspace
+      \sh{Core Ratio:}\enspace{\color{rl}\rule{1cm}{0.3pt}}\quad
+      \sh{Plus Rate:}\enspace{\color{rl}\rule{1cm}{0.3pt}}
+  }
+\end{minipage}%
+\hspace{4mm}
+{\color{rl}\vrule width 0.4pt}
+\hspace{4mm}
+\begin{minipage}[t]{0.60\textwidth}
+  \sh{Reflection}\vspace{0.5mm}
+  \wl\wl\wl\wl
+\end{minipage}
+
+\end{document}
