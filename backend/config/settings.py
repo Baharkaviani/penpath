@@ -88,6 +88,8 @@ CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
 CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+if DEBUG:
+    CELERY_TASK_ALWAYS_EAGER = True
 
 # CORS — required for session auth from the Vite dev server
 CORS_ALLOWED_ORIGINS = os.environ.get(

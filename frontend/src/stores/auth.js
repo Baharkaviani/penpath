@@ -19,12 +19,16 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function ensureCsrf() {
     const { data } = await api.get('/auth/csrf/')
-    if (data?.csrfToken) setCsrfToken(data.csrfToken)
+    if (data?.csrfToken) {
+      setCsrfToken(data.csrfToken)
+    }
+    return data?.csrfToken
   }
 
   async function login(username, password) {
     await ensureCsrf()
     const { data } = await api.post('/auth/login/', { username, password })
+    await ensureCsrf()
     user.value = data
     return data
   }
@@ -32,6 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function register(username, password) {
     await ensureCsrf()
     const { data } = await api.post('/auth/register/', { username, password })
+    await ensureCsrf()
     user.value = data
     return data
   }
@@ -39,6 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function logout() {
     await ensureCsrf()
     await api.post('/auth/logout/')
+    await ensureCsrf()
     user.value = null
   }
 
