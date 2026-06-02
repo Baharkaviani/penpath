@@ -8,3 +8,4 @@ google-cloud-vision==3.7.2
 weasyprint==62.3
 python-dotenv==1.0.1
 gunicorn==21.2.0
+Pillow==10.4.0

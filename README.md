@@ -149,13 +149,41 @@ The Phoenix is recorded permanently but does not restore the broken streak or co
 
 ```bash
 cp .env.example .env
-docker compose up -d
+docker compose up -d --build
+docker compose exec backend python manage.py migrate
+docker compose exec backend python manage.py seed_demo
 ```
 
-- Backend API: http://localhost:8000
-- Frontend: http://localhost:5173
+| Service | URL |
+|---------|-----|
+| Frontend (Vue) | http://localhost:5173 |
+| API | http://localhost:8000/api/v1/ |
+| Admin | http://localhost:8000/admin/ |
 
-To generate the flowboard PDF, open `design/flowboard.tex` in [Overleaf](https://overleaf.com) and compile.
+**Demo login:** `demo` / `demo` (after `seed_demo`).
+
+If login fails with a network or CSRF error, do **not** set `VITE_API_BASE_URL` to port 8000 unless you need to — the default Vite proxy (`/api/v1`) keeps cookies on one origin. Restart the frontend after changing env: `docker compose restart frontend`.
+
+### Environment
+
+See `.env.example`. Key variables: `DB_*`, `REDIS_URL`, `CORS_ALLOWED_ORIGINS`, `GOOGLE_APPLICATION_CREDENTIALS` (optional, for Vision OCR).
+
+### API overview
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/v1/me/` | Current user |
+| POST | `/api/v1/auth/login/` | Session login |
+| GET/PATCH | `/api/v1/weeks/current/` | Current week flowboard |
+| GET | `/api/v1/weeks/{start_date}/flowboard/` | Week detail |
+| POST | `/api/v1/weeks/{start_date}/close/` | Close week + badges |
+| GET | `/api/v1/dashboard/` | Dashboard stats |
+| GET | `/api/v1/history/` | Week list |
+| POST | `/api/v1/scans/` | Upload scan image |
+
+Design tokens and UI map: `frontend/DESIGN.md`.
+
+To generate the flowboard PDF, open `design/flowboard.tex` in [Overleaf](https://overleaf.com) or use `design/flowboard.pdf`.
 
 ---
 
@@ -164,9 +192,10 @@ To generate the flowboard PDF, open `design/flowboard.tex` in [Overleaf](https:/
 - [x] Project structure & Docker setup
 - [x] Printable weekly flowboard (LaTeX)
 - [x] Badge system design (Momentum · Mastery · Resilience)
-- [ ] Scan & OCR pipeline
-- [ ] Digital planner sync
-- [ ] Analytics dashboard
+- [x] Vue 3 app with light + dark themes
+- [x] Django models, REST API, badge services
+- [x] Scan upload + Celery OCR stub
+- [ ] Google Cloud Vision layout parsing (production OCR)
 
 ---
 
