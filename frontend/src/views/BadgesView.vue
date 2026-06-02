@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import StreakBadgeTrack from '../components/StreakBadgeTrack.vue'
 import api from '../api/client'
@@ -30,8 +30,7 @@ function hasBadge(type) {
 </script>
 
 <template>
-  <AppNav page="badges" />
-  <main class="app-main">
+  <PageLayout page="badges">
     <Breadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Badges', to: '/badges' }]" />
     <header class="page-header">
       <h1>Badges</h1>
@@ -65,5 +64,5 @@ function hasBadge(type) {
         <span>{{ b.name }}</span>
       </div>
     </div>
-  </main>
+  </PageLayout>
 </template>

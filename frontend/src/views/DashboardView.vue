@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import StreakBadgeTrack from '../components/StreakBadgeTrack.vue'
 import { useDashboardStore } from '../stores/dashboard'
@@ -19,8 +19,7 @@ const maxHeight = computed(() => Math.max(...chartBars.value.map((b) => b.height
 </script>
 
 <template>
-  <AppNav page="dashboard" />
-  <main class="app-main">
+  <PageLayout page="dashboard">
     <Breadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }]" />
     <header class="page-header">
       <h1>Your numbers this week</h1>
@@ -161,5 +160,5 @@ const maxHeight = computed(() => Math.max(...chartBars.value.map((b) => b.height
         </div>
       </div>
     </section>
-  </main>
+  </PageLayout>
 </template>

@@ -28,34 +28,43 @@ function isActive(link) {
 
 <template>
   <nav class="app-nav" :class="{ 'is-open': navOpen }">
-    <RouterLink class="app-nav__brand" to="/" @click="navOpen = false">
-      <span class="app-nav__mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 19V5M8 19V9M12 19V3M16 19V11M20 19V7"/></svg>
-      </span>
-      Penpath
-    </RouterLink>
-    <div class="app-nav__links">
-      <RouterLink
-        v-for="link in links"
-        :key="link.to"
-        :to="link.to"
-        :class="{ 'is-active': isActive(link) }"
-        @click="navOpen = false"
-      >
-        {{ link.label }}
+    <div class="app-nav__inner">
+      <RouterLink class="app-nav__brand" to="/" @click="navOpen = false">
+        <span class="app-nav__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 19V5M8 19V9M12 19V3M16 19V11M20 19V7"/></svg>
+        </span>
+        Penpath
       </RouterLink>
-    </div>
-    <div class="app-nav__actions">
-      <label class="theme-toggle">
-        <select :value="theme" @change="setTheme($event.target.value)" aria-label="Theme">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="system">System</option>
-        </select>
-      </label>
-      <button v-if="auth.user" type="button" class="btn btn--ghost btn--sm" @click="auth.logout()">Log out</button>
-      <RouterLink v-else class="btn btn--ghost btn--sm" to="/login">Log in</RouterLink>
-      <button type="button" class="btn btn--ghost btn--sm" style="display: none" @click="navOpen = !navOpen" aria-label="Menu">☰</button>
+      <div class="app-nav__links">
+        <RouterLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          :class="{ 'is-active': isActive(link) }"
+          @click="navOpen = false"
+        >
+          {{ link.label }}
+        </RouterLink>
+      </div>
+      <div class="app-nav__actions">
+        <label class="theme-toggle">
+          <select :value="theme" @change="setTheme($event.target.value)" aria-label="Theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="system">System</option>
+          </select>
+        </label>
+        <button v-if="auth.user" type="button" class="btn btn--ghost btn--sm" @click="auth.logout()">Log out</button>
+        <RouterLink v-else class="btn btn--ghost btn--sm" to="/login">Log in</RouterLink>
+        <button
+          type="button"
+          class="btn btn--ghost btn--sm app-nav__menu"
+          @click="navOpen = !navOpen"
+          aria-label="Menu"
+        >
+          ☰
+        </button>
+      </div>
     </div>
   </nav>
 </template>

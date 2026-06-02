@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import FlowboardSheet from '../components/FlowboardSheet.vue'
 import { normalizeWeek } from '../utils/flowboard'
@@ -47,11 +47,11 @@ async function load() {
 }
 
 onMounted(() => {
-  document.body.classList.add('flowboard-page')
+  document.body.classList.add('is-flowboard')
   load()
 })
 onUnmounted(() => {
-  document.body.classList.remove('flowboard-page')
+  document.body.classList.remove('is-flowboard')
 })
 
 watch(() => route.params.weekId, load)
@@ -83,37 +83,46 @@ const crumbs = computed(() => {
   }
   return items
 })
+
+const pageTitle = computed(() =>
+  readOnly.value && week.value ? week.value.label : 'This week’s flowboard'
+)
+
+const pageDescription = computed(() => {
+  if (readOnly.value) {
+    return 'Read-only archive. Edit the current week or pick another from History.'
+  }
+  return 'Fill tasks, tap circles as you progress, rate FLAME at week’s end, then check your Dashboard score.'
+})
 </script>
 
 <template>
-  <div class="flowboard-page">
-    <AppNav page="flowboard" />
-    <div class="flowboard-toolbar">
-      <div>
-        <h1 style="font-size: 1.25rem; margin: 0">
-          {{ readOnly ? `Past week · ${week?.label}` : 'This week’s flowboard' }}
-        </h1>
-        <p style="margin: 0.35rem 0 0; color: var(--ink-muted); font-size: 0.875rem">
-          {{ readOnly ? 'Read-only archive.' : 'Fill tasks, tap circles, rate FLAME at week’s end.' }}
-          <span v-if="saving"> · Saving…</span>
-        </p>
-      </div>
-      <div class="banner__actions">
-        <template v-if="readOnly">
-          <RouterLink class="btn btn--secondary" to="/history">← All weeks</RouterLink>
-          <RouterLink class="btn btn--primary" to="/flowboard">Edit current week</RouterLink>
-        </template>
-        <template v-else>
-          <button type="button" class="btn btn--ghost" @click="print">Print</button>
-          <RouterLink class="btn btn--secondary" to="/scan">Scan paper</RouterLink>
-          <RouterLink class="btn btn--primary" to="/dashboard">Dashboard</RouterLink>
-        </template>
-      </div>
+  <PageLayout page="flowboard">
+    <Breadcrumb :items="crumbs" />
+
+    <header class="page-header">
+      <h1>{{ pageTitle }}</h1>
+      <p>
+        {{ pageDescription }}
+        <span v-if="saving && !readOnly"> · Saving…</span>
+      </p>
+    </header>
+
+    <div class="page-actions">
+      <template v-if="readOnly">
+        <RouterLink class="btn btn--secondary" to="/history">← All weeks</RouterLink>
+        <RouterLink class="btn btn--primary" to="/flowboard">Edit current week</RouterLink>
+      </template>
+      <template v-else>
+        <button type="button" class="btn btn--ghost" @click="print">Print</button>
+        <RouterLink class="btn btn--secondary" to="/scan">Scan paper</RouterLink>
+        <RouterLink class="btn btn--primary" to="/dashboard">Dashboard</RouterLink>
+      </template>
     </div>
 
-    <div v-if="readOnly && week" class="banner banner--archive" style="max-width: 1100px; margin: 0 auto 1rem">
+    <div v-if="readOnly && week" class="banner banner--archive">
       <div>
-        <strong>Archived week</strong> · {{ week.label }}
+        <strong>Archived week</strong>
         <span class="win-pill" :class="week.win ? 'win-pill--win' : 'win-pill--loss'" style="margin-left: 0.5rem">
           {{ week.win ? 'Win' : 'Loss' }}
         </span>
@@ -121,15 +130,11 @@ const crumbs = computed(() => {
       </div>
     </div>
 
-    <main class="app-main flowboard-main">
-      <Breadcrumb :items="crumbs" />
-
-      <p v-if="loading" style="color: var(--ink-muted)">Loading flowboard…</p>
-      <div v-else-if="error" class="card" style="max-width: 1100px; margin: 0 auto">
-        <p style="color: var(--danger); margin: 0 0 1rem">{{ error }}</p>
-        <button type="button" class="btn btn--primary" @click="load">Retry</button>
-      </div>
-      <FlowboardSheet v-else-if="week" :week="week" :read-only="readOnly" @update="onUpdate" />
-    </main>
-  </div>
+    <p v-if="loading" style="color: var(--ink-muted)">Loading flowboard…</p>
+    <div v-else-if="error" class="card">
+      <p style="color: var(--danger); margin: 0 0 1rem">{{ error }}</p>
+      <button type="button" class="btn btn--primary" @click="load">Retry</button>
+    </div>
+    <FlowboardSheet v-else-if="week" :week="week" :read-only="readOnly" @update="onUpdate" />
+  </PageLayout>
 </template>

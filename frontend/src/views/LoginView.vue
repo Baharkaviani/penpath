@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import { useAuthStore } from '../stores/auth'
 
 const auth = useAuthStore()
@@ -36,8 +36,7 @@ async function submit() {
 </script>
 
 <template>
-  <AppNav />
-  <main class="app-main">
+  <PageLayout main-class="app-main--login">
     <div class="card login-panel">
       <h1 style="font-family: var(--font-display); margin-top: 0">Sign in</h1>
       <p style="color: var(--ink-muted); font-size: 0.875rem">Demo account: <code>demo</code> / <code>demo</code> (after seed_demo)</p>
@@ -53,5 +52,5 @@ async function submit() {
         {{ mode === 'login' ? 'Create account' : 'Use existing account' }}
       </button>
     </div>
-  </main>
+  </PageLayout>
 </template>

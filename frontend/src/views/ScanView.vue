@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import api from '../api/client'
 
@@ -47,8 +47,7 @@ async function pollScan() {
 </script>
 
 <template>
-  <AppNav page="scan" />
-  <main class="app-main">
+  <PageLayout page="scan">
     <Breadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Scan', to: '/scan' }]" />
     <header class="page-header">
       <h1>Scan your flowboard</h1>
@@ -79,5 +78,5 @@ async function pollScan() {
         <p style="font-size: 0.8125rem; color: var(--ink-muted); margin: 0">Confirm on flowboard</p>
       </div>
     </div>
-  </main>
+  </PageLayout>
 </template>

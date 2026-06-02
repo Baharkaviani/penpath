@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
-import AppNav from '../components/AppNav.vue'
+import PageLayout from '../components/PageLayout.vue'
 import Breadcrumb from '../components/Breadcrumb.vue'
 import { useWeekStore } from '../stores/week'
 
@@ -11,8 +11,7 @@ onMounted(() => weekStore.fetchHistory())
 </script>
 
 <template>
-  <AppNav page="history" />
-  <main class="app-main">
+  <PageLayout page="history">
     <Breadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'History', to: '/history' }]" />
     <header class="page-header">
       <h1>Week history</h1>
@@ -58,5 +57,5 @@ onMounted(() => weekStore.fetchHistory())
         </tbody>
       </table>
     </div>
-  </main>
+  </PageLayout>
 </template>
