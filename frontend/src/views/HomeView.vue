@@ -54,7 +54,7 @@ import AppNav from '../components/AppNav.vue'
         <li class="workflow-step">
           <div class="workflow-step__num">Step 1</div>
           <strong>Plan</strong>
-          <span>Set focus, prize, up to <strong>7 core tasks</strong> and <strong>5 side quests</strong>.</span>
+          <span>Set focus, prize, core tasks, and side quests.</span>
           <RouterLink to="/flowboard">Open flowboard →</RouterLink>
         </li>
         <li class="workflow-step">

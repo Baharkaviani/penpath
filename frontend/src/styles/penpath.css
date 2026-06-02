@@ -34,6 +34,14 @@
   --page-gutter: 1.5rem;
   --page-pad-top: 2rem;
   --page-pad-bottom: 3rem;
+  /* Brand ink stays dark blue in both themes (text on light surfaces). */
+  --brand-ink: #142a69;
+  --btn-primary-bg: var(--brand-ink);
+  --btn-primary-fg: #ffffff;
+  --btn-primary-bg-hover: #0f2154;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-fg: var(--brand-ink);
+  --btn-secondary-border: var(--brand-ink);
 }
 
 *,
@@ -213,10 +221,13 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  box-sizing: border-box;
+  min-height: 2.5rem;
   padding: 0.6rem 1.25rem;
   font-family: var(--font-sans);
   font-size: 0.875rem;
   font-weight: 600;
+  line-height: 1.25;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
@@ -224,29 +235,36 @@ a:hover {
   transition: background 0.15s, transform 0.1s;
 }
 
+button.btn {
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 .btn:hover {
   text-decoration: none;
 }
 
 .btn--primary {
-  background: var(--ink);
-  color: white;
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+  border: 1.5px solid transparent;
 }
 
 .btn--primary:hover {
-  background: #0f2154;
-  color: white;
+  background: var(--btn-primary-bg-hover);
+  color: var(--btn-primary-fg);
 }
 
 .btn--secondary {
-  background: white;
-  color: var(--ink);
-  border: 1.5px solid var(--ink);
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-fg);
+  border: 1.5px solid var(--btn-secondary-border);
 }
 
 .btn--secondary:hover {
   background: var(--mist);
-  color: var(--ink);
+  color: var(--btn-secondary-fg);
 }
 
 .btn--ghost {
@@ -1206,6 +1224,7 @@ body.is-flowboard {
 }
 
 .btn--sm {
+  min-height: 2rem;
   padding: 0.4rem 0.75rem;
   font-size: 0.8125rem;
 }
@@ -1298,14 +1317,15 @@ body.is-flowboard {
 }
 
 .workflow-step span {
+  display: block;
   font-size: 0.8125rem;
   color: var(--ink-muted);
   line-height: 1.4;
 }
 
 .workflow-step a {
-  display: inline-block;
-  margin-top: 0.5rem;
+  display: block;
+  margin-top: 0.75rem;
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -1618,16 +1638,12 @@ body.is-flowboard {
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.25);
   --stat-icon-bg: #1a2744;
   --stat-icon-color: #7b9ae8;
-}
-
-[data-theme='dark'] .btn--primary:hover {
-  background: #2a3f7a;
-}
-
-[data-theme='dark'] .btn--secondary {
-  background: var(--paper-sheet);
-  color: var(--ink);
-  border-color: var(--line);
+  --btn-primary-bg: #e8edfc;
+  --btn-primary-fg: var(--brand-ink);
+  --btn-primary-bg-hover: #d4dcf5;
+  --btn-secondary-bg: var(--paper-sheet);
+  --btn-secondary-fg: var(--ink);
+  --btn-secondary-border: var(--line);
 }
 
 [data-theme='dark'] .stat-card__icon {

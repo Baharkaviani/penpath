@@ -114,7 +114,7 @@ const pageDescription = computed(() => {
         <RouterLink class="btn btn--primary" to="/flowboard">Edit current week</RouterLink>
       </template>
       <template v-else>
-        <button type="button" class="btn btn--ghost" @click="print">Print</button>
+        <button type="button" class="btn btn--secondary" @click="print">Print</button>
         <RouterLink class="btn btn--secondary" to="/scan">Scan paper</RouterLink>
         <RouterLink class="btn btn--primary" to="/dashboard">Dashboard</RouterLink>
       </template>
