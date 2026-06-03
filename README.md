@@ -87,16 +87,16 @@ Four consecutive wins unlock four crystal badges in order:
 
 | Badge | Name | Color | Symbolism |
 |:---:|---|---|---|
-| <img src="design/badges/week1.webp" width="52"> | **The Seed of Beginning** | Turquoise-blue | New beginnings, initiation of discipline |
-| <img src="design/badges/week2.webp" width="52"> | **The Flame of Focus** | Golden-orange | Growing intensity and momentum |
-| <img src="design/badges/week3.webp" width="52"> | **The Garden of Growth** | Emerald-green | Structured development, flourishing habits |
-| <img src="design/badges/week4.webp" width="52"> | **The Gem of Balance** | Lavender-purple | Harmony and sustainable discipline |
+| <img src="frontend/public/badges/week1.webp" width="52"> | **The Seed of Beginning** | Turquoise-blue | New beginnings, initiation of discipline |
+| <img src="frontend/public/badges/week2.webp" width="52"> | **The Flame of Focus** | Golden-orange | Growing intensity and momentum |
+| <img src="frontend/public/badges/week3.webp" width="52"> | **The Garden of Growth** | Emerald-green | Structured development, flourishing habits |
+| <img src="frontend/public/badges/week4.webp" width="52"> | **The Gem of Balance** | Lavender-purple | Harmony and sustainable discipline |
 
 ### Monthly Milestone
 
 | Badge | Name | Awarded when |
 |:---:|---|---|
-| <img src="design/badges/crown.webp" width="52"> | **The Crown of Consistency** | 4 consecutive winning weeks completed |
+| <img src="frontend/public/badges/crown.webp" width="52"> | **The Crown of Consistency** | 4 consecutive winning weeks completed |
 
 After earning the Crown the cycle restarts at a higher tier — Seed I → Crown I, then Seed II → Crown II, and so on — enabling infinite long-term progression.
 
@@ -104,7 +104,7 @@ After earning the Crown the cycle restarts at a higher tier — Seed I → Crown
 
 | Badge | Name | Awarded when |
 |:---:|---|---|
-| <img src="design/badges/phoenix.png" width="52"> | **The Phoenix of Return** | A failed week is immediately followed by a winning week |
+| <img src="frontend/public/badges/phoenix.png" width="52"> | **The Phoenix of Return** | A failed week is immediately followed by a winning week |
 
 The Phoenix is recorded permanently but does not restore the broken streak or count toward progression.
 
