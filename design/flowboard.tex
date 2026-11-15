@@ -28,13 +28,22 @@
 \renewcommand\tabularxcolumn[1]{m{#1}}
 
 %─── Macros ────────────────────────────────────────────────────────────────────
-% Single tracking circle
-\newcommand{\tc}{%
-  \tikz[baseline=-0.6ex]{\draw[ring, line width=0.45pt](0,0)circle(4pt);}%
-  \hspace{2.5pt}%
+% Tracker: 14 circles on one row; modest radius + even spacing to fill m{6.1cm}
+\newlength{\trackerradius}
+\setlength{\trackerradius}{4.75pt}
+\newlength{\trackercolwd}
+\setlength{\trackercolwd}{6.1cm}
+\newdimen\trackergap
+\newcommand{\tracker}{%
+  \trackergap\dimexpr \trackercolwd - 2\tabcolsep - 14\dimexpr 2\trackerradius\relax - 1.25pt\relax
+  \divide\trackergap by 13\relax
+  \mbox{%
+    \foreach \n in {1,...,14}{%
+      \tikz[baseline=-0.6ex]{\draw[ring, line width=0.45pt](0,0)circle(\trackerradius);}%
+      \ifnum\n<14 \kern\trackergap\fi
+    }%
+  }%
 }
-% Seven circles (one per day)
-\newcommand{\tracker}{\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc\tc}
 
 % Write line — safe inside p-columns
 \newcommand{\wl}{%
@@ -80,32 +89,31 @@
 \newcommand{\tableheader}[1]{%
   \hline
   \rule[-4pt]{0pt}{14pt}\sh{#1} &
-  \rule[-4pt]{0pt}{14pt}\sh{Why?} &
-  \rule[-4pt]{0pt}{14pt}\sh{Est.\ Time} &
+  \rule[-4pt]{0pt}{14pt}\sh{Estimation} &
   \rule[-4pt]{0pt}{14pt}\sh{Tracker\enspace{[Free Yourself]}} &
-  \rule[-4pt]{0pt}{14pt}\sh{Notes} \\%
+  \rule[-4pt]{0pt}{14pt}\sh{Why?} \\%
 }
 
 % Core task table — 7 rows
 \newcommand{\coretable}[1]{%
   \renewcommand{\arraystretch}{1.0}%
   \noindent%
-  \begin{tabularx}{\textwidth}{m{8cm}m{4cm}m{1.8cm}m{6.1cm}X}
+  \begin{tabularx}{\textwidth}{m{12cm}m{1.8cm}m{6.1cm}X}
     \tableheader{#1}
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
   \end{tabularx}%
 }
@@ -114,18 +122,18 @@
 \newcommand{\tasktable}[1]{%
   \renewcommand{\arraystretch}{1.0}%
   \noindent%
-  \begin{tabularx}{\textwidth}{m{8cm}m{4cm}m{1.8cm}m{6.1cm}X}
+  \begin{tabularx}{\textwidth}{m{12cm}m{1.8cm}m{6.1cm}X}
     \tableheader{#1}
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
-    \dstrut & & & \tracker & \\
+    \dstrut & & \tracker & \\
     \hline
   \end{tabularx}%
 }

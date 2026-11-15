@@ -38,11 +38,10 @@ The flowboard is a single A4 landscape page (`design/flowboard.tex`). Print it, 
 
 | Column | Purpose |
 |---|---|
-| Main Goal | The task or goal for the week |
-| Why? | Your reason — keeps motivation visible |
-| Est. Time | How long you expect it to take |
-| Tracker [Free Yourself] | A row of circles to fill in as you make progress |
-| Notes | Observations, blockers, or context |
+| Main Goal | The task or goal for the week (wider column; former “Why?” space folded in) |
+| Estimation | How long you expect it to take |
+| Tracker [Free Yourself] | 14 circles per row — fill in as you make progress |
+| Why? | Your reason, blockers, or context (formerly “Notes”) |
 
 **Side Quests** — 5 rows
 
