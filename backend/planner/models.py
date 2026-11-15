@@ -47,9 +47,8 @@ class Task(models.Model):
     kind = models.CharField(max_length=8, choices=KIND_CHOICES)
     sort_order = models.PositiveSmallIntegerField()
     goal = models.CharField(max_length=500, blank=True)
-    why = models.CharField(max_length=500, blank=True)
-    est_time = models.CharField(max_length=64, blank=True)
-    notes = models.TextField(blank=True)
+    estimation = models.CharField(max_length=64, blank=True)
+    why = models.TextField(blank=True)
     tracker_filled = models.PositiveSmallIntegerField(default=0)
 
     class Meta:

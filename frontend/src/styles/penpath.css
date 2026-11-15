@@ -430,6 +430,15 @@ button.btn {
   border-bottom: none;
 }
 
+.flame-list--dims li {
+  grid-template-columns: 6.5rem 1fr 2rem;
+}
+
+.flame-dim-label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
 .flame-letter {
   font-weight: 700;
   color: var(--ink);
@@ -746,22 +755,23 @@ body.is-flowboard {
   outline: none;
 }
 
-.col-goal { width: 32%; }
-.col-why { width: 16%; }
-.col-time { width: 8%; }
-.col-tracker { width: 28%; }
-.col-notes { width: 16%; }
+.col-goal { width: 33.6%; }
+.col-time { width: 9%; }
+.col-tracker { width: 30%; }
+.col-why { width: 27.4%; }
 
 .tracker-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  min-width: 0;
 }
 
 .tracker-circle {
-  width: 18px;
-  height: 18px;
+  width: 1.125rem;
+  height: 1.125rem;
   border-radius: 50%;
   border: 1.5px solid var(--ring);
   background: transparent;

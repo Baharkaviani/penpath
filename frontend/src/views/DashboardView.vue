@@ -85,11 +85,10 @@ const maxHeight = computed(() => Math.max(...chartBars.value.map((b) => b.height
         </p>
       </div>
       <div class="card card--mist">
-        <h2 class="section-title">FLAME + Fulfillment (this week)</h2>
-        <ul class="flame-list">
+        <h2 class="section-title">FLAME + Fulfillment Review</h2>
+        <ul class="flame-list flame-list--dims">
           <li v-for="f in flame" :key="f.name">
-            <span class="flame-letter">{{ f.letter }}</span>
-            <span>{{ f.name }}</span>
+            <span class="flame-dim-label">{{ f.name }}</span>
             <div class="flame-bar"><span :style="{ width: `${f.score * 20}%` }" /></div>
             <span class="flame-score">{{ f.score }}</span>
           </li>

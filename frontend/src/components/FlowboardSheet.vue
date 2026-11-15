@@ -1,15 +1,15 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { normalizeWeek } from '../utils/flowboard'
+import { TRACKER_CIRCLES, normalizeWeek } from '../utils/flowboard'
 import { computeRatesFromTasks, scoreClass } from '../utils/scoring'
 
 const FLAME_ITEMS = [
-  { dim: 'focus', letter: 'F', label: 'Focus', q: 'How present and focused were you?' },
-  { dim: 'leverage', letter: 'L', label: 'Leverage', q: 'Highest-impact work?' },
-  { dim: 'alignment', letter: 'A', label: 'Alignment', q: 'Aligned with who you want to become?' },
-  { dim: 'momentum', letter: 'M', label: 'Momentum', q: 'Staying ahead and moving forward?' },
-  { dim: 'energy', letter: 'E', label: 'Energy', q: 'Energized and sustainable?' },
-  { dim: 'fulfillment', letter: '+', label: 'Fulfillment', q: 'Fulfilled and satisfied?' },
+  { dim: 'focus', label: 'Focus', q: 'How present and focused were you while working?' },
+  { dim: 'leverage', label: 'Leverage', q: 'Did you spend time on the highest-impact things?' },
+  { dim: 'alignment', label: 'Alignment', q: 'Did your actions align with who you want to become?' },
+  { dim: 'momentum', label: 'Momentum', q: 'How much did you stay ahead of the tasks?' },
+  { dim: 'energy', label: 'Energy', q: 'How energized and physically sustainable did you feel?' },
+  { dim: 'fulfillment', label: 'Fulfillment', q: 'How fulfilled and satisfied did you feel about yourself?' },
 ]
 
 const props = defineProps({
@@ -104,21 +104,19 @@ function onFieldChange() {
         <thead>
           <tr>
             <th class="col-goal">Main Goal</th>
-            <th class="col-why">Why?</th>
-            <th class="col-time">Est. Time</th>
+            <th class="col-time">Estimation</th>
             <th class="col-tracker">Tracker [Free Yourself]</th>
-            <th class="col-notes">Notes</th>
+            <th class="col-why">Why?</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(task, i) in local.coreTasks" :key="'c' + i">
             <td><input v-model="task.goal" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
-            <td><input v-model="task.why" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
-            <td><input v-model="task.time" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
+            <td><input v-model="task.estimation" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
             <td>
               <div class="tracker-row">
                 <button
-                  v-for="n in 14"
+                  v-for="n in TRACKER_CIRCLES"
                   :key="n"
                   type="button"
                   class="tracker-circle"
@@ -129,7 +127,7 @@ function onFieldChange() {
                 />
               </div>
             </td>
-            <td><input v-model="task.notes" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
+            <td><input v-model="task.why" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
           </tr>
         </tbody>
       </table>
@@ -141,21 +139,19 @@ function onFieldChange() {
         <thead>
           <tr>
             <th class="col-goal">Side Activity</th>
+            <th class="col-time">Estimation</th>
+            <th class="col-tracker">Tracker [Free Yourself]</th>
             <th class="col-why">Why?</th>
-            <th class="col-time">Est. Time</th>
-            <th class="col-tracker">Tracker</th>
-            <th class="col-notes">Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(task, i) in local.sideTasks" :key="'s' + i">
             <td><input v-model="task.goal" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
-            <td><input v-model="task.why" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
-            <td><input v-model="task.time" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
+            <td><input v-model="task.estimation" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
             <td>
               <div class="tracker-row">
                 <button
-                  v-for="n in 14"
+                  v-for="n in TRACKER_CIRCLES"
                   :key="n"
                   type="button"
                   class="tracker-circle"
@@ -165,7 +161,7 @@ function onFieldChange() {
                 />
               </div>
             </td>
-            <td><input v-model="task.notes" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
+            <td><input v-model="task.why" type="text" :readonly="readOnly" @input="onFieldChange" /></td>
           </tr>
         </tbody>
       </table>
@@ -188,11 +184,10 @@ function onFieldChange() {
 
     <div class="flowboard-bottom">
       <div class="flame-review">
-        <div class="flowboard-section-label">FLAME + Fulfillment</div>
+        <div class="flowboard-section-label">FLAME + Fulfillment Review</div>
         <div v-for="item in FLAME_ITEMS" :key="item.dim" class="flame-item">
           <div class="flame-item__text">
-            <strong>{{ item.letter }} — {{ item.label }}</strong>
-            <span>{{ item.q }}</span>
+            <strong>{{ item.label }}:</strong> <span>{{ item.q }}</span>
           </div>
           <div class="rating-scale">
             <button

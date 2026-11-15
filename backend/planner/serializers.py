@@ -14,20 +14,20 @@ from .services import update_week_scores
 
 User = get_user_model()
 
-FLAME_LETTERS = {
-    'focus': ('F', 'Focus'),
-    'leverage': ('L', 'Leverage'),
-    'alignment': ('A', 'Alignment'),
-    'momentum': ('M', 'Momentum'),
-    'energy': ('E', 'Energy'),
-    'fulfillment': ('+', 'Fulfillment'),
+FLAME_DIMENSIONS = {
+    'focus': 'Focus',
+    'leverage': 'Leverage',
+    'alignment': 'Alignment',
+    'momentum': 'Momentum',
+    'energy': 'Energy',
+    'fulfillment': 'Fulfillment',
 }
 
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ['id', 'kind', 'sort_order', 'goal', 'why', 'est_time', 'notes', 'tracker_filled']
+        fields = ['id', 'kind', 'sort_order', 'goal', 'estimation', 'why', 'tracker_filled']
 
 
 class FlameRatingSerializer(serializers.ModelSerializer):
@@ -119,9 +119,8 @@ class WeekDetailSerializer(serializers.ModelSerializer):
     def _task_dict(self, task):
         return {
             'goal': task.goal,
+            'estimation': task.estimation,
             'why': task.why,
-            'time': task.est_time,
-            'notes': task.notes,
             'trackerFilled': task.tracker_filled,
         }
 
@@ -129,14 +128,14 @@ class WeekDetailSerializer(serializers.ModelSerializer):
         tasks = obj.tasks.filter(kind=Task.KIND_CORE).order_by('sort_order')
         rows = [self._task_dict(t) for t in tasks]
         while len(rows) < 7:
-            rows.append({'goal': '', 'why': '', 'time': '', 'notes': '', 'trackerFilled': 0})
+            rows.append({'goal': '', 'estimation': '', 'why': '', 'trackerFilled': 0})
         return rows[:7]
 
     def get_sideTasks(self, obj):
         tasks = obj.tasks.filter(kind=Task.KIND_SIDE).order_by('sort_order')
         rows = [self._task_dict(t) for t in tasks]
         while len(rows) < 5:
-            rows.append({'goal': '', 'why': '', 'time': '', 'notes': '', 'trackerFilled': 0})
+            rows.append({'goal': '', 'estimation': '', 'why': '', 'trackerFilled': 0})
         return rows[:5]
 
     def get_flameRatings(self, obj):
@@ -194,9 +193,11 @@ class WeekWriteSerializer(serializers.Serializer):
                 sort_order=i,
                 defaults={
                     'goal': row.get('goal', ''),
-                    'why': row.get('why', ''),
-                    'est_time': row.get('time', row.get('est_time', '')),
-                    'notes': row.get('notes', ''),
+                    'estimation': row.get(
+                        'estimation',
+                        row.get('time', row.get('est_time', '')),
+                    ),
+                    'why': row.get('why', row.get('notes', '')),
                     'tracker_filled': min(14, max(0, int(row.get('trackerFilled', 0)))),
                 },
             )
@@ -248,10 +249,10 @@ def build_dashboard_payload(user):
 
     flame_list = []
     if current:
-        for dim, (letter, name) in FLAME_LETTERS.items():
+        for dim, name in FLAME_DIMENSIONS.items():
             rating = current.flame_ratings.filter(dimension=dim).first()
             score = rating.score if rating else 0
-            flame_list.append({'letter': letter, 'name': name, 'score': score})
+            flame_list.append({'name': name, 'score': score})
 
     closed_count = weeks.count()
     wins = weeks.filter(is_win=True).count()

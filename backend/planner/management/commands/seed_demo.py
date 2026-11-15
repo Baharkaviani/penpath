@@ -8,6 +8,22 @@ from django.core.management.base import BaseCommand
 from planner.models import BadgeProgress, FlameRating, Reflection, Task, UserBadge, Week
 from planner.services import CORE_ROWS, SIDE_ROWS, update_week_scores
 
+def _normalize_seed_task(row):
+    if not row:
+        return {}
+    estimation = row.get('estimation') or row.get('time', '')
+    why = (row.get('why') or '').strip()
+    notes = (row.get('notes') or '').strip()
+    if notes:
+        why = f'{why} — {notes}' if why else notes
+    return {
+        'goal': row.get('goal', ''),
+        'estimation': estimation,
+        'why': why,
+        'trackerFilled': row.get('trackerFilled', 0),
+    }
+
+
 DEMO_WEEKS = [
     {
         'id': '2026-05-26',
@@ -122,27 +138,27 @@ class Command(BaseCommand):
             )
             week.tasks.all().delete()
             for i in range(CORE_ROWS):
-                row = (data.get('coreTasks') or [{}])[i] if i < len(data.get('coreTasks') or []) else {}
+                raw = (data.get('coreTasks') or [{}])[i] if i < len(data.get('coreTasks') or []) else {}
+                row = _normalize_seed_task(raw)
                 Task.objects.create(
                     week=week,
                     kind=Task.KIND_CORE,
                     sort_order=i,
                     goal=row.get('goal', ''),
+                    estimation=row.get('estimation', ''),
                     why=row.get('why', ''),
-                    est_time=row.get('time', ''),
-                    notes=row.get('notes', ''),
                     tracker_filled=row.get('trackerFilled', 0),
                 )
             for i in range(SIDE_ROWS):
-                row = (data.get('sideTasks') or [{}])[i] if i < len(data.get('sideTasks') or []) else {}
+                raw = (data.get('sideTasks') or [{}])[i] if i < len(data.get('sideTasks') or []) else {}
+                row = _normalize_seed_task(raw)
                 Task.objects.create(
                     week=week,
                     kind=Task.KIND_SIDE,
                     sort_order=i,
                     goal=row.get('goal', ''),
+                    estimation=row.get('estimation', ''),
                     why=row.get('why', ''),
-                    est_time=row.get('time', ''),
-                    notes=row.get('notes', ''),
                     tracker_filled=row.get('trackerFilled', 0),
                 )
             for dim, score in (data.get('flameRatings') or {}).items():

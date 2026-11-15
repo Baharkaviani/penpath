@@ -18,10 +18,10 @@ def process_scan(scan_id: int):
             'focus': 'Imported from scan (review)',
             'prize': '',
             'coreTasks': [
-                {'goal': 'Review OCR row 1', 'why': '', 'time': '', 'notes': '', 'trackerFilled': 8},
+                {'goal': 'Review OCR row 1', 'estimation': '', 'why': '', 'trackerFilled': 8},
             ]
-            + [{'goal': '', 'why': '', 'time': '', 'notes': '', 'trackerFilled': 0}] * 6,
-            'sideTasks': [{'goal': '', 'why': '', 'time': '', 'notes': '', 'trackerFilled': 0}] * 5,
+            + [{'goal': '', 'estimation': '', 'why': '', 'trackerFilled': 0}] * 6,
+            'sideTasks': [{'goal': '', 'estimation': '', 'why': '', 'trackerFilled': 0}] * 5,
             'flameRatings': {
                 'focus': 3,
                 'leverage': 3,

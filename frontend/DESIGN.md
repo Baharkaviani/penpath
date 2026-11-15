@@ -69,7 +69,8 @@ Based on [WIRED (getdesign.md)](https://getdesign.md/wired/design-md): serif for
 
 ### Flowboard table
 - Header row: `--head-bg`, `--ink` labels.
-- Tracker circles: 18px diameter, `--ring` stroke; filled = `--ink` bg.
+- Columns: Main Goal (wide), Estimation, Tracker [Free Yourself], Why? — API fields: `goal`, `estimation`, `why`, `trackerFilled`.
+- Tracker: 14 circles per row, single line, `--ring` stroke; filled = `--ink` bg.
 
 ### FLAME rating
 - 5 circles per row, numbered 1–5; selected = `--ink` fill.
