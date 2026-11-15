@@ -25,7 +25,7 @@ Most planners force a choice: the tactile focus of pen and paper, or the power o
 
 The flowboard is a single A4 landscape page (`design/flowboard.tex`). Print it, fill it in by hand, scan it at the end of the week.
 
-![Weekly Flowboard Preview](design/flowboard-preview.png)
+![Weekly Flowboard Preview](design/flowboard-preview.jpg)
 
 ### Layout
 
@@ -64,7 +64,7 @@ A 6-question self-rating section, each scored 1–5, completed at the end of the
 | F | Focus | How present and focused were you while working? |
 | L | Leverage | Did you spend time on the highest-impact things? |
 | A | Alignment | Did your actions align with who you want to become? |
-| M | Momentum | How much did you stay ahead and keep moving forward? |
+| M | Momentum | How much did you stay ahead of the tasks? |
 | E | Energy | How energized and physically sustainable did you feel? |
 | + | Fulfillment | How fulfilled and satisfied did you feel about yourself? |
 
